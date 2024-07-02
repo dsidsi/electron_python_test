@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>窗口标题</title>
+    </head>
+    <body>
+        <button id="sendMsg1">发送消息</button>
+        <script>
+            let { ipcRenderer } = require("electron");
+            document.querySelector("#sendMsg1").addEventListener('click', ()=>{
+                ipcRenderer.send('msg_render2main', {name: 'param1'}, {name: 'param2'});
+            });
+            ipcRenderer.on('msg_main2render', (event, param1, param2) => {
+                console.log('msg_main2render', param1);
+                console.log('msg_main2render', param2);
+                console.log(event.sender);
+            })
+        </script>
+    </body>
+</html>
+
